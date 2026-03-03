@@ -1,0 +1,75 @@
+Wavenumber_Start_cm-1,Wavenumber_End_cm-1,Assignment,Intensity
+100,210,Lattice vibrations,Strong
+150,430,X-metal-O,Strong
+250,400,C-C aliphatic chain,Strong
+295,340,Se-Se,Strong
+425,550,S-S,Strong
+460,550,Si-O-Si,Strong
+490,660,C-I,Strong
+505,700,C-Br,Strong
+550,790,C-Cl,Strong
+580,680,C=S,Strong
+630,1250,C-C aliphatic chains,Moderate
+670,780,C-S,Strong
+720,800,C-F,Strong
+800,950,C-O-C,Weak
+910,960,Carboxylic acid dimer,Weak
+990,1100,Aromatic rings,Strong
+1010,1095,Si-O-C,Weak
+1010,1095,Si-O-Si,Weak
+1020,1225,C=S,Strong
+1025,1060,Sulfonic acid,Very weak
+1050,1210,Sulfonamide,Moderate
+1050,1210,Sulfone,Moderate
+1120,1190,Si-O-C,Weak
+1145,1240,Sulfonic acid,Very weak
+1315,1435,Carboxylate salt,Moderate
+1320,1350,Nitro,Very strong
+1355,1385,C-CH3,Weak
+1365,1450,Aromatic azo,Very strong
+1405,1455,CH2,Weak
+1405,1455,CH3,Weak
+1450,1505,Aromatic ring,Moderate
+1535,1600,Nitro,Moderate
+1540,1590,Aliphatic azo,Moderate
+1550,1610,Aromatic/hetero ring,Strong
+1550,1700,Amide,Strong
+1600,1710,Ketone,Moderate
+1610,1740,Carboxylic acid,Moderate
+1625,1680,C=C,Very strong
+1630,1665,C=N,Very strong
+1690,1720,Urethane,Moderate
+1710,1725,Aldehyde,Moderate
+1710,1745,Ester,Moderate
+1730,1750,Aliphatic ester,Moderate
+1735,1790,Lactone,Moderate
+1740,1830,Anhydride,Moderate
+1745,1780,Acid chloride,Moderate
+2020,2100,Isothiocyanate,Moderate
+2070,2250,Alkyne,Strong
+2080,2150,Si-H,Moderate
+2090,2170,Isonitrile,Moderate
+2100,2170,Thiocyanate,Very weak
+2110,2160,Azide,Moderate
+2200,2230,Aromatic nitrile,Moderate
+2200,2280,Diazonium salt,Moderate
+2220,2260,Nitrile,Moderate
+2230,2270,Isocyanate,Very weak
+2290,2420,P-H,Very weak
+2530,2610,Thiol,Strong
+2680,2740,Aldehyde,Weak
+2750,2800,N-CH3,Weak
+2770,2830,CH2,Strong
+2780,2830,Aldehyde,Weak
+2790,2850,O-CH3,Weak
+2810,2960,C-CH3,Strong
+2870,3100,Aromatic C-H,Strong
+2880,3530,OH,Weak
+2900,2940,CH2,Strong
+2980,3020,CH=CH,Strong
+3010,3080,=CH2,Strong
+3150,3480,Amide,Moderate
+3150,3480,Amine,Moderate
+3200,3400,Phenol,Weak
+3210,3250,Alcohol,Weak
+3250,3300,Alkyne,Very weak
