@@ -1,0 +1,7 @@
+"Reference","Qty","Value","DNP","Exclude from BOM","Exclude from Board","Footprint","Datasheet"
+"C1","1","0.1uF","","","","Capacitor_SMD:C_0603_1608Metric","~"
+"C2","1","1uF","","","","Capacitor_SMD:C_0603_1608Metric","~"
+"R1","1","2.2M","","","","Resistor_SMD:R_0805_2012Metric","~"
+"R2","1","1k","","","","Resistor_SMD:R_0603_1608Metric","~"
+"U1","1","OPA380","","","","Package_SO:MSOP-8_3x3mm_P0.65mm",""
+"U2","1","ZXRE160","","","","Package_TO_SOT_SMD:SOT-353_SC-70-5",""
