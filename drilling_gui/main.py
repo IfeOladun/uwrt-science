@@ -36,6 +36,7 @@ selection_button2 = tkinter.Button(frame, text="Position 2", command=lambda: sen
 selection_button3 = tkinter.Button(frame, text="Position 3", command=lambda: send_to_serial(arduino_serial, "2"))
 selection_button4 = tkinter.Button(frame, text="Position 4", command=lambda: send_to_serial(arduino_serial, "3"))
 selection_button5 = tkinter.Button(frame, text="Position 5", command=lambda: send_to_serial(arduino_serial, "4"))
+reset_button = tkinter.Button(frame, text="Reset Position", command=lambda: send_to_serial(arduino_serial, "reset"))
 
 selection_label.grid(row=4, column=2)
 selection_button1.grid(row=5, column=0)
@@ -43,5 +44,6 @@ selection_button2.grid(row=5, column=1)
 selection_button3.grid(row=5, column=2)
 selection_button4.grid(row=5, column=3)
 selection_button5.grid(row=5, column=4)
+reset_button.grid(row=6, column=2)
   
 root.mainloop()

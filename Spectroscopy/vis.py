@@ -33,7 +33,7 @@ while(True):
     wavelengths = (x * 300/np.max(x)) + 400
 
     ax1.cla()
-    ax1.plot(wavelengths, absorbance)
+    ax1.plot(wavelengths, absorbance, "k")
     ax1.set_title("Absorbance vs Wavelength")
     ax1.set_xlabel("Wavelength")
     ax1.set_ylabel("Absorbance")
