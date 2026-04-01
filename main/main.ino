@@ -135,15 +135,15 @@ class Motor {
         if (hasEncoder) {
             float target = angle;
             const int slowDownAngle = 50;
-            const int maxSpeed = 127;
-            const int minSpeed = 40;
+            const int maxSpeed = 40;
+            const int minSpeed = 20;
             while (true) {
                 float encoderCounts = (*encoder).read();
                 float input = (encoderCounts / encoderCPR) * 360.0;
 
                 float error = target - input;
 
-                if (abs(error) < 3) {
+                if (abs(error) < 5) {
                     break;
                 }
 
@@ -250,9 +250,9 @@ void loop() {
             } else if (fromSerial == "reverse") {
                 motor1.rotate(1, 255);
             } else if (fromSerial == "up") {
-                steppers.move_mm(10, 1);
+                steppers.move_mm(50, 1);
             } else if (fromSerial == "down") {
-                steppers.move_mm(10, 0);
+                steppers.move_mm(50, 0);
             } else if (fromSerial == "0") {
                 motor2.rotate_deg(0);
             } else if (fromSerial == "1") {
