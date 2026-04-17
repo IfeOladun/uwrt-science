@@ -72,7 +72,7 @@ class Motor {
     }
 
     void stop() {
-        digitalWrite(motorDirPin, 127);
+        analogWrite(motorDirPin, 127);
         analogWrite(motorPwmPin, 0);
     }
 
@@ -82,7 +82,7 @@ class Motor {
             long last = millis();
 
             float lastCount = (*encoder).read();
-            rotate(1, 127);
+            rotate(1, 40);
             while (true) {
                 if (millis() - last > 100) {
                     float currentCount = (*encoder).read();
@@ -184,14 +184,18 @@ class Stepper_Motors {
   private:
     int stp_pin1;
     int dir_pin1;
+    int en_pin1;
     int stp_pin2;
     int dir_pin2;
+    int en_pin2;
   public:
-    void init(int step_pin1, int direction_pin1, int step_pin2, int direction_pin2) {
+    void init(int step_pin1, int direction_pin1, int enable_pin1, int step_pin2, int direction_pin2, int enable_pin2) {
         stp_pin1 = step_pin1;
         dir_pin1 = direction_pin1;
         stp_pin2 = step_pin2;
         dir_pin2 = direction_pin2;
+        en_pin1 = enable_pin1;
+        en_pin2 = enable_pin2;
         pinMode(stp_pin1, OUTPUT);
         pinMode(dir_pin1, OUTPUT);
         pinMode(stp_pin2, OUTPUT);
@@ -199,6 +203,8 @@ class Stepper_Motors {
     }
 
     void move_mm(int mils, int dir) {
+        digitalWrite(en_pin1, LOW);
+        digitalWrite(en_pin2, LOW);
         digitalWrite(dir_pin1, dir > 0 ? LOW : HIGH);  // 0/high is down, 1/low is up
         digitalWrite(dir_pin2, dir > 0 ? LOW : HIGH);
         for (int i = 0; i < mils * 50; i++) {  // ~ 1mm / 50 pulses
@@ -210,30 +216,45 @@ class Stepper_Motors {
             delayMicroseconds(1000);
         }
     }
+
+    void disable() {
+        digitalWrite(en_pin1, HIGH);
+        digitalWrite(en_pin2, HIGH);
+    }
 };
 
-const int dir1 = 4;
-const int pwm1 = 5;
-const int dir2 = 7;
-const int pwm2 = 6;
+const int dir_drill = 4;
+const int pwm_drill = 5;
+const int dir_sel = 7;
+const int pwm_sel = 6;
 const int encA = 2;
 const int encB = 3;
 const int step1 = 8;
 const int step_dir1 = 9;
+const int step_en1 = 12;
 const int step2 = 10;
 const int step_dir2 = 11;
+const int step_en2 = 13;
+const int pwm_spec = 22;
+const int dir_spec = 23;
+const int pwm_redox = 24;
+const int dir_redox = 25;
 
 const float CPR = 341.2 * 4;  // counts per revolution of the motor; per motor basis check datasheet (341.2)
 
-Motor motor1;
-Motor motor2;
+Motor drilling_motor;
+Motor selection_motor;
+Motor pump_for_spectrometer;
+Motor pump_for_redox;
 Stepper_Motors steppers;
 
 void setup() {
     Serial.begin(9600);
-    motor1.init(pwm1, dir1);
-    motor2.init(pwm2, dir2, true, encA, encB, CPR);
-    steppers.init(step1, step_dir1, step2, step_dir2);
+    drilling_motor.init(pwm_drill, dir_drill);
+    selection_motor.init(pwm_sel, dir_sel, true, encA, encB, CPR);
+    pump_for_spectrometer.init(pwm_spec, dir_spec);
+    pump_for_redox.init(pwm_redox, dir_redox);
+    steppers.init(step1, step_dir1, step_en1, step2, step_dir2, step_en2);
 }
 
 void loop() {
@@ -244,31 +265,41 @@ void loop() {
         Serial.println(fromSerial);
         if (fromSerial.length() > 0) {
             if (fromSerial == "on") {
-                motor1.rotate(0, 127);
+                drilling_motor.rotate(0, 255);
             } else if (fromSerial == "off") {
-                motor1.stop();
+                drilling_motor.stop();
             } else if (fromSerial == "reverse") {
-                motor1.rotate(1, 255);
+                drilling_motor.rotate(1, 255);
             } else if (fromSerial == "up") {
                 steppers.move_mm(50, 1);
             } else if (fromSerial == "down") {
                 steppers.move_mm(50, 0);
+            } else if (fromSerial == "up5") {
+                steppers.move_mm(10, 1);
+            } else if (fromSerial == "down5") {
+                steppers.move_mm(10, 0);
+            } else if (fromSerial == "3up") {
+                steppers.move_mm(150, 1);
+            } else if (fromSerial == "3down") {
+                steppers.move_mm(150, 0)
             } else if (fromSerial == "0") {
-                motor2.rotate_deg(0);
+                selection_motor.rotate_deg(0);
             } else if (fromSerial == "1") {
-                motor2.rotate_deg(72);
+                selection_motor.rotate_deg(72);
             } else if (fromSerial == "2") {
-                motor2.rotate_deg(144);
+                selection_motor.rotate_deg(144);
             } else if (fromSerial == "3") {
-                motor2.rotate_deg(216);
+                selection_motor.rotate_deg(216);
             } else if (fromSerial == "4") {
-                motor2.rotate_deg(288);
+                selection_motor.rotate_deg(288);
             } else if (fromSerial == "reset") {
-                motor2.starting_position();
+                selection_motor.starting_position();
             } else if (fromSerial == "p") {
-                Serial.println(motor2.get_degrees());
+                Serial.println(selection_motor.get_degrees());
             } else if (fromSerial == "c") {
-                Serial.println(motor2.get_counts());
+                Serial.println(selection_motor.get_counts());
+            } else if (fromSerial == "lax") {
+                steppers.disable();
             }
             fromSerial = "";
         }
