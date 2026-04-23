@@ -37,8 +37,8 @@ position_button_down_fifth.grid(row=3, column=3)
 position_button_up.grid(row=4, column=1)
 position_button_down.grid(row=4, column=3)
 
-position_button_3down.grid(row=5, column=1)
-position_button_3up.grid(row=5, column=3)
+position_button_3up.grid(row=5, column=1)
+position_button_3down.grid(row=5, column=3)
 
 position_button_off.grid(row=3, column=2)
 

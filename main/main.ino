@@ -88,7 +88,7 @@ class Motor {
                     float currentCount = (*encoder).read();
                     if (abs(currentCount - lastCount) < 5) {
                         break;
-                    } else if (millis() - first > 500) {
+                    } else if (millis() - first > 1000) {
                         break;
                     }
                     last = millis();
@@ -240,7 +240,7 @@ const int dir_spec = 23;
 const int pwm_redox = 24;
 const int dir_redox = 25;
 
-const float CPR = 341.2 * 4;  // counts per revolution of the motor; per motor basis check datasheet (341.2)
+const float CPR = 380 * 4; // counts per revolution of the motor; per motor basis check datasheet (341.2)
 
 Motor drilling_motor;
 Motor selection_motor;
@@ -281,7 +281,7 @@ void loop() {
             } else if (fromSerial == "3up") {
                 steppers.move_mm(150, 1);
             } else if (fromSerial == "3down") {
-                steppers.move_mm(150, 0)
+                steppers.move_mm(150, 0);
             } else if (fromSerial == "0") {
                 selection_motor.rotate_deg(0);
             } else if (fromSerial == "1") {
